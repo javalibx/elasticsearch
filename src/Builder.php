@@ -269,14 +269,17 @@ class Builder
      * @param callable $callback
      * @param string $type
      * @param bool $directly
+     * @param float $boost
      * @return $this
      */
-    public function bool(callable $callback, string $type, bool $directly = false): static
+    public function bool(callable $callback, string $type, bool $directly = false, float $boost = 1.0): static
     {
         $builder = (new static());
         call_user_func($callback, $builder);
+        $boolQuery = $builder->getQueryEndpoint()->getBoolQuery();
+        $boolQuery->setBoost($boost);
         $this->getQueryEndpoint()->addBoolQuery(
-            $builder->getQueryEndpoint()->getBoolQuery(), $type, $directly
+            $boolQuery, $type, $directly
         );
 
         return $this;
@@ -285,11 +288,12 @@ class Builder
     /**
      * @param callable $callback
      * @param bool $directly
+     * @param float $boost
      * @return $this
      */
-    public function must(callable $callback, bool $directly = false): static
+    public function must(callable $callback, bool $directly = false, float $boost = 1.0): static
     {
-        return $this->bool($callback, BoolQuery::MUST_QUERY, $directly);
+        return $this->bool($callback, BoolQuery::MUST_QUERY, $directly, $boost);
     }
 
     /**
@@ -305,11 +309,12 @@ class Builder
     /**
      * @param callable $callback
      * @param bool $directly
+     * @param float $boost
      * @return $this
      */
-    public function should(callable $callback, bool $directly = false): static
+    public function should(callable $callback, bool $directly = false, float $boost = 1.0): static
     {
-        return $this->bool($callback, BoolQuery::SHOULD_QUERY, $directly);
+        return $this->bool($callback, BoolQuery::SHOULD_QUERY, $directly, $boost);
     }
 
     /**
