@@ -103,6 +103,17 @@ class Builder
     }
 
     /**
+     * @param string $index
+     * @return $this
+     */
+    public function from(string $index): static
+    {
+        $this->setIndex($index);
+
+        return $this;
+    }
+
+    /**
      * @param string $field
      * @param string $operator
      * @param mixed $value
@@ -299,22 +310,22 @@ class Builder
     /**
      * @param callable $callback
      * @param bool $directly
-     * @return $this
-     */
-    public function filter(callable $callback, bool $directly = false): static
-    {
-        return $this->bool($callback, BoolQuery::FILTER_QUERY, $directly);
-    }
-
-    /**
-     * @param callable $callback
-     * @param bool $directly
      * @param float $boost
      * @return $this
      */
     public function should(callable $callback, bool $directly = false, float $boost = 1.0): static
     {
         return $this->bool($callback, BoolQuery::SHOULD_QUERY, $directly, $boost);
+    }
+
+    /**
+     * @param callable $callback
+     * @param bool $directly
+     * @return $this
+     */
+    public function filter(callable $callback, bool $directly = false): static
+    {
+        return $this->bool($callback, BoolQuery::FILTER_QUERY, $directly);
     }
 
     /**

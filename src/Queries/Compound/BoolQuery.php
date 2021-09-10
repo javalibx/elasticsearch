@@ -3,10 +3,8 @@ declare(strict_types=1);
 
 namespace Kabunx\Elasticsearch\Queries\Compound;
 
-use Illuminate\Database\Query\Builder;
 use Kabunx\Elasticsearch\Contracts\CompoundQueryInterface;
 use Kabunx\Elasticsearch\Contracts\QueryInterface;
-use Kabunx\Elasticsearch\Queries\NullQuery;
 use Kabunx\Elasticsearch\Queries\Query;
 use stdClass;
 
@@ -123,23 +121,6 @@ class BoolQuery extends Query implements CompoundQueryInterface
         return $query instanceof BoolQuery
             ? $query->getCrossedQuery($pType)
             : $query;
-    }
-
-    /**
-     * @return array
-     */
-    public function getAllQueries(): array
-    {
-        $queries = [];
-        foreach ($this->typeQueries as $type => $tQueries) {
-            foreach ($tQueries as $query) {
-                if ($query instanceof BoolQuery) {
-
-                }
-            }
-        }
-
-        return $queries;
     }
 
     /**

@@ -26,8 +26,9 @@ trait ToQuery
     public function where(string $field, string $operator, mixed $value, array $params = []): static
     {
         $query = $this->guessQuery($field, $operator, $value, $params);
+        $type = in_array($operator, ['<>', '!=']) ? BoolQuery::MUST_NOT_QUERY : BoolQuery::MUST_QUERY;
 
-        return $this->addQuery($query);
+        return $this->addQuery($query, $type);
     }
 
     /**
