@@ -206,6 +206,13 @@ class Builder
         return $this->where($field, 'match', $value, $params);
     }
 
+    public function between(string $field, int|float $min, int|float $max, array $params = []): static
+    {
+        $this->getQueryEndpoint()->between($field, $min, $max, $params);
+
+        return $this;
+    }
+
     /**
      * @param string $field
      * @param int|float $value
