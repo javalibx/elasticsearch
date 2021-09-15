@@ -449,7 +449,6 @@ class Builder
         return $this->limit(1)->get();
     }
 
-
     /**
      * @param array $params
      * @return array
@@ -465,6 +464,17 @@ class Builder
     public function getBoolQuery(): BoolQuery
     {
         return $this->getQueryEndpoint()->getBoolQuery();
+    }
+
+    /**
+     * @param int $match
+     * @return $this
+     */
+    public function setMinimumShouldMatch(int $match = 1): static
+    {
+        $this->getQueryEndpoint()->setMinimumShouldMatch($match);
+
+        return $this;
     }
 
     /**
