@@ -87,9 +87,6 @@ class BoolQuery extends Query implements CompoundQueryInterface
     public function addQuery(QueryInterface $query, string $type): static
     {
         if ($this->isValidType($type)) {
-            if ($this->isShouldType($type)) {
-                $this->setMinimumShouldMatch();
-            }
             $this->typeQueries[$type][] = $query;
         }
 
