@@ -5,12 +5,7 @@ namespace Kabunx\Elasticsearch;
 
 use Elasticsearch\Client;
 use Elasticsearch\ClientBuilder;
-use Illuminate\Support\Facades\Log;
 
-/**
- * Class Engine
- * @package Kabunx\Elasticsearch
- */
 class Engine
 {
 
@@ -83,10 +78,6 @@ class Engine
      */
     public function search(array $params): array
     {
-        if (app()->environment() == 'local') {
-            Log::info('es params ' . json_encode($params));
-        }
-
         return $this->client->search($params);
     }
 
