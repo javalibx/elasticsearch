@@ -318,10 +318,12 @@ class Builder
      * @param callable $callback
      * @param bool $directly
      * @param float $boost
+     * @param int $match
      * @return $this
      */
-    public function should(callable $callback, bool $directly = false, float $boost = 1.0): static
+    public function should(callable $callback, bool $directly = false, float $boost = 1.0, int $match = 1): static
     {
+        $this->setMinimumShouldMatch($match);
         return $this->bool($callback, BoolQuery::SHOULD_QUERY, $directly, $boost);
     }
 
@@ -470,7 +472,7 @@ class Builder
      * @param int $match
      * @return $this
      */
-    public function setMinimumShouldMatch(int $match = 1): static
+    public function setMinimumShouldMatch(int $match): static
     {
         $this->getQueryEndpoint()->setMinimumShouldMatch($match);
 

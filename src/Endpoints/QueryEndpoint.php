@@ -108,7 +108,7 @@ class QueryEndpoint implements EndpointInterface
     /**
      * @param int $match
      */
-    public function setMinimumShouldMatch(int $match = 1)
+    public function setMinimumShouldMatch(int $match)
     {
         $this->boolQuery->setMinimumShouldMatch($match);
     }
