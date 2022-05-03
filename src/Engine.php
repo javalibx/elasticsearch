@@ -15,12 +15,6 @@ class Engine
     protected Client $client;
 
     /**
-     * @var Builder
-     */
-    protected Builder $builder;
-
-
-    /**
      * Engine constructor.
      * @param array $hosts
      */
